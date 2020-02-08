@@ -5,8 +5,8 @@
 using namespace std;
 
 int main() {
-    char block[2048];
-    char flipped[2048];
+    char block[2097152];
+    char flipped[2097152];
 
     FILE *f = fopen("/dev/sdb", "rb+");
     if(f == NULL) {
@@ -14,7 +14,7 @@ int main() {
         return 0;
     }
 
-    fseek(f, 0x1BE, SEEK_SET);
+    fseek(f, 0x00, SEEK_SET);
 
     fread(block, 1, sizeof(block), f);
 
@@ -29,7 +29,7 @@ int main() {
         printf("%.2X  ", flipped[x]);
     }
 
-    fseek(f, 0x1BE, SEEK_SET);
+    fseek(f, 0x00, SEEK_SET);
     fwrite(flipped, 1, sizeof(flipped), f);
 
     fclose(f);
